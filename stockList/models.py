@@ -14,4 +14,4 @@ class Tables(models.Model):
         verbose_name_plural="Tables"
     
     def __str__(self):
-        return self.codProd
+        return self.nomProd
