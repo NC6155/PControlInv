@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 def tables(request):
     tablesEntries=Tables.objects.all()
-    paginator = Paginator(tablesEntries, 20)
+    paginator = Paginator(tablesEntries, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(request, "stockList/tables.html",
