@@ -24,7 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', cViews.index, name='index'),
-    path('tables', sViews.tables, name='tables'),
+    path('tables/', sViews.tables, name='tables'),
 ]
 
 if settings.DEBUG:
