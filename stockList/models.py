@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Tables(models.Model):
-    codProd=models.IntegerField(max_length=4)
+    codProd=models.IntegerField()
     nomProd=models.CharField(max_length=20)
     calificacion=models.TextField()
     tipoProd=models.TextField()

@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', cViews.index, name='index'),
     path('tables/', sViews.tables, name='tables'),
+    path('adding_stock/', sViews.add_stock, name='stockAdd'),
 ]
 
 if settings.DEBUG:
