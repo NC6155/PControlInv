@@ -5,7 +5,8 @@ from .forms import TablesCreateForm
 from django.views.generic import TemplateView
 from openpyxl import Workbook
 from django.http import HttpResponse
-
+from openpyxl.styles import Font, Alignment, PatternFill
+from openpyxl.utils import get_column_letter
 
 
 
@@ -35,13 +36,25 @@ class ReporteExcel(TemplateView):
         productos = Tables.objects.all()
         wb = Workbook()
         ws = wb.active
+        
+        
         ws['B1'] = 'Productos de Bodega'
         ws.merge_cells('B1:E1')
-        ws['B3'] = 'CodPro'
-        ws['C3'] = 'NomPro'
-        ws['D3'] = 'Calificacion'
-        ws['E3'] = 'TipoProd'
-        ws['F3'] = 'Stock'
+        ws['B1'].font = Font(size=14, bold=True)
+        ws['B1'].alignment = Alignment(horizontal='center')
+        
+        
+        headers = ['Código Producto', 'Nombre Producto', 'Calificación', 'Tipo de Producto', 'Stock']
+        col_idx = 2
+        for header in headers:
+            cell = ws.cell(row=3, column=col_idx)
+            cell.value = header
+            cell.font = Font(bold=True)
+            cell.alignment = Alignment(horizontal='center')
+            cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+            col_idx += 1
+        
+      
         cont = 5
         for producto in productos:
             ws.cell(row=cont, column=2).value = producto.codProd
@@ -50,9 +63,24 @@ class ReporteExcel(TemplateView):
             ws.cell(row=cont, column=5).value = producto.tipoProd
             ws.cell(row=cont, column=6).value = producto.stock
             cont += 1
+        
+        
+        for col in ws.iter_cols(min_col=2, max_col=6):
+            max_length = 0
+            column_letter = get_column_letter(col[0].column)
+            for cell in col:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+            adjusted_width = (max_length + 2)
+            ws.column_dimensions[column_letter].width = adjusted_width
+        
         nombre_archivo = "Productos_Bodega.xlsx"
         response = HttpResponse(content_type='application/ms-excel')
         content = "attachment; filename={0}".format(nombre_archivo)
         response['Content-Disposition'] = content
         wb.save(response)
         return response
+
