@@ -19,7 +19,7 @@ def tables(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(request, "stockList/tables.html",
-                  {"page_obj": page_obj})
+                  {"page_obj": page_obj, "everyEntry": tablesEntries})
 
 def add_stock(request):
     form = TablesCreateForm(request.POST or None)
@@ -52,6 +52,22 @@ def delete_stock(request, pk):
 		queryset.delete()
 		return redirect('/tables/')
 	return render(request, 'stockList/delete_stock.html')
+
+def reorder_stock(request, pk):
+	queryset = Tables.objects.get(id=pk)
+	form = TablesReorderForm(request.POST or None, instance=queryset)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+	
+
+		return redirect("/tables/")
+	context = {
+			"instance": queryset,
+			"form": form,
+		}
+	return render(request, "stockList/add_stock.html", context)
+
 
 class ReporteExcel(TemplateView):
     def get(self, request, *args, **kwargs):

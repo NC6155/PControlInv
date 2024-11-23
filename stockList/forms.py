@@ -10,3 +10,8 @@ class TablesUpdateForm(forms.ModelForm):
     class Meta:
         model=Tables
         fields=['nomProd', 'calificacion', 'tipoProd', 'stock']
+
+class TablesReorderForm(forms.ModelForm):
+	class Meta:
+		model = Tables
+		fields = ['stock'] #Número para trackear cuando tiene que ser ordenado otro producto

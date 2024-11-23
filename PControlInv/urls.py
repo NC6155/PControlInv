@@ -28,6 +28,7 @@ urlpatterns = [
     path('reporte_excel/', sViews.ReporteExcel.as_view(), name='reporte_excel'),
     path('update_stock/<str:pk>/', sViews.update_stock, name="update_stock"),
     path('delete_stock/<str:pk>/', sViews.delete_stock, name="delete_stock"),
+    path('reorder_stock/<str:pk>/', sViews.reorder_stock, name="reorder_stock"),
 ]
 
 if settings.DEBUG:
