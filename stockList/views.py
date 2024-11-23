@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Tables
 from django.core.paginator import Paginator
-from .forms import TablesCreateForm
+from .forms import *
 from django.views.generic import TemplateView
 from openpyxl import Workbook
 from django.http import HttpResponse
@@ -11,6 +11,7 @@ from openpyxl.utils import get_column_letter
 
 
 # Create your views here.
+
 
 def tables(request):
     tablesEntries=Tables.objects.all().order_by('id')
@@ -30,6 +31,27 @@ def add_stock(request):
 		"title": "Add Item",
 	}
     return render(request, "stockList/add_stock.html", context)
+
+def update_stock(request, pk):
+	queryset = Tables.objects.get(id=pk)
+	form = TablesUpdateForm(instance=queryset)
+	if request.method == 'POST':
+		form = TablesUpdateForm(request.POST, instance=queryset)
+		if form.is_valid():
+			form.save()
+			return redirect('/tables/')
+
+	context = {
+		'form':form
+	}
+	return render(request, 'stockList/add_stock.html', context)
+
+def delete_stock(request, pk):
+	queryset = Tables.objects.get(id=pk)
+	if request.method == 'POST':
+		queryset.delete()
+		return redirect('/tables/')
+	return render(request, 'stockList/delete_stock.html')
 
 class ReporteExcel(TemplateView):
     def get(self, request, *args, **kwargs):
