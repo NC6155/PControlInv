@@ -10,3 +10,7 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
     margin-right: 10px;
 }
 
+
+.notificationColor:hover{
+    background-color:rgb(255, 203, 107);
+}
