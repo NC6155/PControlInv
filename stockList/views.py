@@ -7,6 +7,7 @@ from openpyxl import Workbook
 from django.http import HttpResponse
 from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.utils import get_column_letter
+from django.contrib import messages
 
 
 
@@ -25,6 +26,7 @@ def add_stock(request):
     form = TablesCreateForm(request.POST or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Guardado exitosamente')
         return redirect('/adding_stock/')
     context = {
 		"form": form,
@@ -33,40 +35,42 @@ def add_stock(request):
     return render(request, "stockList/add_stock.html", context)
 
 def update_stock(request, pk):
-	queryset = Tables.objects.get(id=pk)
-	form = TablesUpdateForm(instance=queryset)
-	if request.method == 'POST':
-		form = TablesUpdateForm(request.POST, instance=queryset)
-		if form.is_valid():
-			form.save()
-			return redirect('/tables/')
-
-	context = {
+    queryset = Tables.objects.get(id=pk)
+    form = TablesUpdateForm(instance=queryset)
+    if request.method == 'POST':
+        form = TablesUpdateForm(request.POST, instance=queryset)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Actualizado exitosamente')
+            return redirect('/tables/')
+    context = {
 		'form':form
-	}
-	return render(request, 'stockList/add_stock.html', context)
+    }
+    return render(request, 'stockList/add_stock.html', context)
 
 def delete_stock(request, pk):
-	queryset = Tables.objects.get(id=pk)
-	if request.method == 'POST':
-		queryset.delete()
-		return redirect('/tables/')
-	return render(request, 'stockList/delete_stock.html')
+    queryset = Tables.objects.get(id=pk)
+    if request.method == 'POST':
+        queryset.delete()
+        messages.success(request, 'Eliminado exitosamente')
+        return redirect('/tables/')
+    return render(request, 'stockList/delete_stock.html')
 
 def reorder_stock(request, pk):
-	queryset = Tables.objects.get(id=pk)
-	form = TablesReorderForm(request.POST or None, instance=queryset)
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.save()
+    queryset = Tables.objects.get(id=pk)
+    form = TablesReorderForm(request.POST or None, instance=queryset)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, 'Stock reducido exitosamente')
 	
 
-		return redirect("/tables/")
-	context = {
+        return redirect("/tables/")
+    context = {
 			"instance": queryset,
 			"form": form,
 		}
-	return render(request, "stockList/add_stock.html", context)
+    return render(request, "stockList/add_stock.html", context)
 
 
 class ReporteExcel(TemplateView):
