@@ -22,7 +22,9 @@ from django.conf import settings
 urlpatterns = [
     path('stockList/', include(('stockList.urls', 'stockList'), namespace='stockList')),
     path('admin/', admin.site.urls),
-    path('', cViews.index, name='index'),
+    path('', cViews.login, name='login'),
+    path('index/', cViews.index, name='index'),
+    path('register/', cViews.register, name='register'),
     path('tables/', sViews.tables, name='tables'),
     path('adding_stock/', sViews.add_stock, name='stockAdd'),
     path('reporte_excel/', sViews.ReporteExcel.as_view(), name='reporte_excel'),
