@@ -16,11 +16,25 @@ from django.contrib import messages
 
 def tables(request):
     tablesEntries=Tables.objects.all().order_by('id')
-    paginator = Paginator(tablesEntries, 5)
+    form=TablesSearchForm(request.POST or None)
+    paginator = Paginator(tablesEntries, 5) #paginador, dividido por 5 entradas en cada pagina
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "stockList/tables.html",
-                  {"page_obj": page_obj, "everyEntry": tablesEntries})
+    context = {
+        "form": form,
+        "everyEntry": tablesEntries,
+        "page_obj": page_obj,
+        } #contexto para la página, para definirlo de una sola forma
+    if request.method == 'POST': #Si hubo un método post dentro del html
+        page_obj = Tables.objects.filter(codProd__icontains=form['codProd'].value(), #filtra las tablas por estos valores
+                                        nomProd__icontains=form['nomProd'].value()
+                                        )
+        context = {
+        "form": form,
+        "everyEntry": tablesEntries,
+        "page_obj": page_obj,
+        }
+    return render(request, "stockList/tables.html", context)
 
 def add_stock(request):
     form = TablesCreateForm(request.POST or None)
@@ -71,6 +85,7 @@ def reorder_stock(request, pk):
 			"form": form,
 		}
     return render(request, "stockList/add_stock.html", context)
+
 
 
 class ReporteExcel(TemplateView):

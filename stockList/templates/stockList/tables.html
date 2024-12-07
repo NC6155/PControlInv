@@ -17,6 +17,10 @@
 <link href="{% static 'core/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 {% endblock %}
 
+
+
+
+
 {% block content %}
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -30,11 +34,34 @@
                    </ul>
                     {% endif %}
 
+
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
                         </div>
+                        <div>
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Buscar producto</h6>
+                            
+                            <form class="navbar-search" method="POST" action="">
+                                {% csrf_token %}
+                                    <div class="input-group">
+                                        <div class="border-0" aria-label="Search" aria-describedby="basic-addon2" style="margin-left:10px; margin-right:10px">
+                                        {{form.as_table}}
+                                        <input class="btn btn-primary" type="submit" value="Buscar">
+                                        </div>
+                                        <div class="input-group-append">
+                                            
+                                        </input>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
