@@ -70,21 +70,6 @@ def delete_stock(request, pk):
         return redirect('/tables/')
     return render(request, 'stockList/delete_stock.html')
 
-def reorder_stock(request, pk):
-    queryset = Tables.objects.get(id=pk)
-    form = TablesReorderForm(request.POST or None, instance=queryset)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, 'Stock reducido exitosamente')
-	
-
-        return redirect("/tables/")
-    context = {
-			"instance": queryset,
-			"form": form,
-		}
-    return render(request, "stockList/add_stock.html", context)
 
 
 

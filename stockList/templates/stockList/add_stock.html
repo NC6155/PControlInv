@@ -24,9 +24,9 @@
                            {% endfor %}
                    </ul>
                     {% endif %}
-
-                    <form method='POST' action='' >{% csrf_token %}
-                        <div class="formCorrector">
+                    <div>
+                    <form method='POST' action='' class="user form-floating">{% csrf_token %}
+                        <div class="form-group">
                             {{form.as_p}}
                         </div>
                         
@@ -36,6 +36,7 @@
 
 
                 </div>
+            </div>
                 <!-- /.container-fluid -->
 
             </div>

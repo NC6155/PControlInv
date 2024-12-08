@@ -3,24 +3,30 @@ from .models import Tables
 from django.forms import CharField, IntegerField
 
 class TablesCreateForm(forms.ModelForm):
+    codProd=IntegerField( label="Codigo del producto " ,required=True, widget=forms.NumberInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    nomProd=CharField( label="Nombre del producto",max_length=20, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    tipoProd=CharField(label="Tipo del producto", max_length=13, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    stock=IntegerField(label="Stock del producto", required=True, widget=forms.NumberInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+
+
     class Meta:
         model=Tables
         fields=['codProd', 'nomProd', 'calificacion', 'tipoProd', 'stock']
 
 class TablesUpdateForm(forms.ModelForm):
+    nomProd=CharField( label="Nombre del producto",max_length=20, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    tipoProd=CharField(label="Tipo del producto", max_length=13, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    stock=IntegerField(label="Stock del producto", required=True, widget=forms.NumberInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    
     class Meta:
         model=Tables
         fields=['nomProd', 'calificacion', 'tipoProd', 'stock']
 
-class TablesReorderForm(forms.ModelForm):
-	class Meta:
-		model = Tables
-		fields = ['stock'] #Número para trackear cuando tiene que ser ordenado otro producto
-
 class TablesSearchForm(forms.ModelForm):
-    codProd=IntegerField( label="Codigo" ,required=False)
-    nomProd=CharField( label="Nombre",max_length=20, required=False)
+    codProd=IntegerField( label="Codigo" ,required=False, widget=forms.NumberInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
+    nomProd=CharField( label="Nombre",max_length=20, required=False, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
 
     class Meta:
         model = Tables
         fields = ['codProd', 'nomProd']
+
