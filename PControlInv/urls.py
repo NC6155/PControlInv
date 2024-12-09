@@ -18,6 +18,7 @@ from django.urls import path, include
 from core import views as cViews
 from stockList import views as sViews
 from django.conf import settings
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('stockList/', include(('stockList.urls', 'stockList'), namespace='stockList')),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('reporte_excel/', sViews.ReporteExcel.as_view(), name='reporte_excel'),
     path('update_stock/<str:pk>/', sViews.update_stock, name="update_stock"),
     path('delete_stock/<str:pk>/', sViews.delete_stock, name="delete_stock"),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),    
 ]
 
 if settings.DEBUG:
