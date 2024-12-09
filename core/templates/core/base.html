@@ -57,7 +57,23 @@
 
 
 
+            
+            
+            {% if tipoUsuario == "Bodeguero" %}
             <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/reducir_stock/">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Reducir producto</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tables/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Productos</span></a>
+            </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/adding_stock/">
                     <i class="fas fa-fw fa-folder"></i>
@@ -76,9 +92,10 @@
                 <a class="nav-link" href="/tables/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Productos</span></a>
+                    <span>{{tiposUsuario}}</span></a>
             </li>
+            {% endif %}
 
-            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
