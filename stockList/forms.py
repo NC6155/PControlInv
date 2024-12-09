@@ -13,6 +13,8 @@ class TablesCreateForm(forms.ModelForm):
         model=Tables
         fields=['codProd', 'nomProd', 'calificacion', 'tipoProd', 'stock']
 
+
+
 class TablesUpdateForm(forms.ModelForm):
     nomProd=CharField( label="Nombre del producto",max_length=20, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
     tipoProd=CharField(label="Tipo del producto", max_length=13, required=True, widget=forms.TextInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
