@@ -20,8 +20,12 @@ class Tables(models.Model):
         return self.nomProd
 
     def clean(self):
+        #valida que solo Stock 
         if self.stock < 0:
             raise ValidationError("El stock no puede ser menor que 0.")
+        #valida que solo sean numeros con isdigit
+        if not str(self.codProd).isdigit:
+            raise ValidationError("El código del producto debe contener solo números.")
 
     def save(self, *args, **kwargs):
         self.clean()  
