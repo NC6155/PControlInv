@@ -5,6 +5,8 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import UserClass
 from django.contrib.auth.models import User
+
+
 # Create your views here.
 
 
@@ -44,7 +46,7 @@ def logout_view(request):
     return redirect('registration/login.html')
 
 def userType(request):
-    user_type=UserClass.objects.get(user=request.user).ocupacion
-    context={"tipoUsuario":user_type}
+    user_type = UserClass.objects.get(user=request.user).ocupacion
+    context={"tipoUsuario" : user_type}
     return render(request, "core/base.html", context)
 

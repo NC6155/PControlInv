@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class UserClass(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) #crea una variable usuario que actúa como foránea del usuario principal
-    tiposUsuario=(("Bodeguero", "Bodeguero"), ("Jefe de Inventario","Jefe de Inventario"))
+    tiposUsuario=(("bodeguero", "Bodeguero"), ("jefe de Inventario","Jefe de Inventario"))
     ocupacion=models.TextField(max_length=20, blank=False, null=False, choices=tiposUsuario, verbose_name="Ocupación") #Crea la variable de la ocupación del usuario
 
 

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-tiposUsuario=(("Bodeguero", "Bodeguero"), ("Jefe de Inventario","Jefe de Inventario"))
+tiposUsuario=(("bodeguero", "Bodeguero"), ("jefe de Inventario","Jefe de Inventario"))
 class CustomUserCreationForm(UserCreationForm):
 	username=forms.CharField(label="Ingrese su nombre de usuario" ,required=True, widget=forms.TextInput(attrs={"class":"form-control form-control-user"}))
 	email = forms.EmailField(label="Ingrese su Email", required=True, widget=forms.EmailInput(attrs={"class":"form-control form-control-user", "aria-describedby":"emailHelp"}))

@@ -54,26 +54,20 @@
             <div class="sidebar-heading">
                 Manejo de productos
             </div>
+            
 
 
 
             
-            
-            {% if tipoUsuario == "Bodeguero" %}
-            <!-- Nav Item - Charts -->
+            {% for test in tipoUsuario %}
             <li class="nav-item">
                 <a class="nav-link" href="/reducir_stock/">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Reducir producto</span></a>
+                    <span>{{test.ocupacion}}</span></a>
             </li>
+            {% endfor %}
+            {% if tipoUsuario == 'bodeguero' %}
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/tables/">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Productos</span></a>
-            </li>
-            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/adding_stock/">
                     <i class="fas fa-fw fa-folder"></i>
@@ -84,7 +78,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/reducir_stock/">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Reducir producto</span></a>
+                    <span>Reducir stock de producto</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -92,7 +86,21 @@
                 <a class="nav-link" href="/tables/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Productos</span></a>
-                    <span>{{tiposUsuario}}</span></a>
+                    
+            </li>
+            {% else %}
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/reducir_stock/">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Reducir stock de producto</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tables/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Productos</span></a>
             </li>
             {% endif %}
 
