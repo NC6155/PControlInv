@@ -19,19 +19,20 @@ from core import views as cViews
 from stockList import views as sViews
 from django.conf import settings
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('stockList/', include(('stockList.urls', 'stockList'), namespace='stockList')),
     path('admin/', admin.site.urls),
-    path('', cViews.index, name='index'),
+    path('', login_required(cViews.index), name='index'),
     path('register/', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('tables/', sViews.tables, name='tables'),
-    path('adding_stock/', sViews.add_stock, name='stockAdd'),
-    path('reporte_excel/', sViews.ReporteExcel.as_view(), name='reporte_excel'),
-    path('update_stock/<str:pk>/', sViews.update_stock, name="update_stock"),
-    path('delete_stock/<str:pk>/', sViews.delete_stock, name="delete_stock"),
-    #path('logout/', LogoutView.as_view(next_page='login'), name='logout'),    
+    path('tables/', login_required(sViews.tables), name='tables'),
+    path('adding_stock/', login_required(sViews.add_stock), name='stockAdd'),
+    path('reporte_excel/', login_required(sViews.ReporteExcel.as_view()), name='reporte_excel'),
+    path('update_stock/<str:pk>/', login_required(sViews.update_stock), name="update_stock"),
+    path('delete_stock/<str:pk>/', login_required(sViews.delete_stock), name="delete_stock"),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
 ]
 
 if settings.DEBUG:
