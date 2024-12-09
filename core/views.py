@@ -5,8 +5,6 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 # Create your views here.
 
-def login(request):
-    return render(request, "registration/login.html")
 
 #def register(request):
     #return render(request, "registration/register.html")
@@ -28,7 +26,7 @@ def register(request):
 
             #user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
             #login(request, user)
-            return redirect('index')
+            return redirect('/')
         else:
             data['form'] = user_creation_form
 

@@ -23,15 +23,15 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('stockList/', include(('stockList.urls', 'stockList'), namespace='stockList')),
     path('admin/', admin.site.urls),
-    path('', cViews.login, name='login'),
-    path('index/', cViews.index, name='index'),
-    path('register/', cViews.register, name='register'),
+    path('', cViews.index, name='index'),
+    path('register/', include('core.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('tables/', sViews.tables, name='tables'),
     path('adding_stock/', sViews.add_stock, name='stockAdd'),
     path('reporte_excel/', sViews.ReporteExcel.as_view(), name='reporte_excel'),
     path('update_stock/<str:pk>/', sViews.update_stock, name="update_stock"),
     path('delete_stock/<str:pk>/', sViews.delete_stock, name="delete_stock"),
-    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),    
+    #path('logout/', LogoutView.as_view(next_page='login'), name='logout'),    
 ]
 
 if settings.DEBUG:
