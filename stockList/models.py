@@ -24,5 +24,5 @@ class Tables(models.Model):
             raise ValidationError("El stock no puede ser menor que 0.")
 
     def save(self, *args, **kwargs):
-        self.clean()  # Llamamos al método clean para ejecutar la validación
+        self.clean()  
         super().save(*args, **kwargs)
