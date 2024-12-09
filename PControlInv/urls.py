@@ -33,7 +33,7 @@ urlpatterns = [
     path('update_stock/<str:pk>/', login_required(sViews.update_stock), name="update_stock"),
     path('delete_stock/<str:pk>/', login_required(sViews.delete_stock), name="delete_stock"),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-    path('reducir_stock/', sViews.reducir_stock, name='reducir_stock')
+    path('reducir_stock/', login_required(sViews.reducir_stock), name='reducir_stock')
 ]
 
 if settings.DEBUG:
