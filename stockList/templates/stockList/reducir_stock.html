@@ -13,25 +13,26 @@
 {% endblock  %}
 
     {% block content %}
-
-    <h1>Reducir Stock</h1>
-    <form action="{% url 'reducir_stock' %}" method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="codProd" class="form-label">Código del Producto</label>
-            <input type="number" id="codProd" name="codProd" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="cantidad" class="form-label">Cantidad a Reducir</label>
-            <input type="number" id="cantidad" name="cantidad" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Reducir Stock</button>
-    </form>
-    {% if mensaje %}
-        <p>{{ mensaje }}</p>
-    {% endif %}
-    <a href="{% url 'index' %}">Volver al inicio</a>
-
+    <div class="container-fluid">
+        <h1>Reducir Stock</h1>
+        <form action="{% url 'reducir_stock' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="codProd" class="form-label">Código del Producto</label>
+                <input type="number" id="codProd" name="codProd" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad a Reducir</label>
+                <input type="number" id="cantidad" name="cantidad" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Reducir Stock</button>
+        </form>
+        {% if mensaje %}
+            <p>{{ mensaje }}</p>
+        {% endif %}
+        <a href="{% url 'index' %}">Volver al inicio</a>
+    </div>
+    <hr>
 
     {% endblock %}
 
