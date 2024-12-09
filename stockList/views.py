@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Tables
 from django.core.paginator import Paginator
 from .forms import *
@@ -70,6 +70,32 @@ def delete_stock(request, pk):
         return redirect('/tables/')
     return render(request, 'stockList/delete_stock.html')
 
+def reducir_stock(request):
+    mensaje = ""
+    if request.method == 'POST':
+        codProd = request.POST.get('codProd')
+        cantidad = int(request.POST.get('cantidad'))
+
+        # Buscar todos los productos por su código
+        productos = Tables.objects.filter(codProd=codProd)
+
+        if productos.exists():
+            for producto in productos:
+                if cantidad > 0 and producto.stock >= cantidad:
+                    # Reducir el stock
+                    producto.stock -= cantidad
+                    producto.save()
+                    mensaje = f'Stock del producto {producto.nomProd} reducido en {cantidad}. Stock actual: {producto.stock}.'
+                else:
+                    mensaje = 'Cantidad no válida o stock insuficiente.'
+        else:
+            mensaje = 'Producto no encontrado.'
+
+    context = {
+        'mensaje': mensaje
+    }
+
+    return render(request, 'stockList/reducir_stock.html', context)
 
 
 
