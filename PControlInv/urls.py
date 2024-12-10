@@ -36,6 +36,6 @@ urlpatterns = [
     path('reducir_stock/', login_required(sViews.reducir_stock), name='reducir_stock')
 ]
 
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#if settings.DEBUG:
+#    from django.conf.urls.static import static
+#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
