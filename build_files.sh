@@ -1,5 +1,6 @@
 #!/bin/bash
-python3 -m pip install -r requirements.txt
+pip install django
+pip install -r requirements.txt
 echo "Building the project..."
 python3 -m pip install --upgrade pip
 echo "Make Migration..."
