@@ -45,8 +45,5 @@ def logout_view(request):
     logout(request)
     return redirect('registration/login.html')
 
-def userType(request):
-    user_type = UserClass.objects.get(user=request.user).ocupacion
-    context={"tipoUsuario" : user_type}
-    return render(request, "core/base.html", context)
+
 

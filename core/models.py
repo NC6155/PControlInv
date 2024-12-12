@@ -15,4 +15,4 @@ class UserClass(models.Model):
         verbose_name_plural="Ocupaciones de usuario"
     
     def __str__(self):
-        return self.ocupacion
+        return f"{self.user.username} - {self.ocupacion}"
