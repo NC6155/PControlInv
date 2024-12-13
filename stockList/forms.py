@@ -9,9 +9,16 @@ class TablesCreateForm(forms.ModelForm):
     stock=IntegerField(label="Stock del producto", required=True, widget=forms.NumberInput(attrs={'class':'form-control form-control-user bg-light small', 'aria-describedby':'basic-addon2'}))
 
 
+
     class Meta:
         model=Tables
         fields=['codProd', 'nomProd', 'calificacion', 'tipoProd', 'stock']
+    def clean_codProd(self):
+        codProd = self.cleaned_data['codProd']
+
+        if Tables.objects.filter(codProd=codProd).exists():
+            raise forms.ValidationError('Código de producto ya existente')
+        return codProd
 
 
 

@@ -99,7 +99,10 @@
                                     </tbody>
                                     {% endfor %}
                                 </table>
+                                {% if perfil_usuario.ocupacion == "jefe de Inventario" %}
                                 <a href="{% url 'stockList:reporte_excel' %}" class="btn btn-success">Excel</a>
+                                {% endif %}
+                                
 
                                 <div class="btn-group paginator-style Bbutton" role="group" aria-label="Basic outlined example">
 
